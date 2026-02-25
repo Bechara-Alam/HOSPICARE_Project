@@ -1,2 +1,2 @@
-# HOSPICARE_FYP
+# HOSPICARE_project
 Hospital management system

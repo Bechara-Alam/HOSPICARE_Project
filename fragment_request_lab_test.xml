@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F6F9"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Patient ID -->
+        <EditText
+            android:id="@+id/edit_patient_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Patient ID"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Test Name -->
+        <EditText
+            android:id="@+id/edit_test_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Test Name"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Report -->
+        <EditText
+            android:id="@+id/edit_report"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="Medical Report"
+            android:gravity="top"
+            android:background="@android:drawable/editbox_background"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Upload PDF -->
+        <Button
+            android:id="@+id/button_upload_pdf"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Upload PDF"
+            android:background="@drawable/button_blue_rounded"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+        <!-- Send Result -->
+        <Button
+            android:id="@+id/button_send_result"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:text="Send Result"
+            android:background="@drawable/button_blue_rounded"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</ScrollView>

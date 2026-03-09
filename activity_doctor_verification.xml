@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E9EEF5">
+
+    <!-- Only ONE child inside scroll -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ===== Header ===== -->
+        <View
+            android:id="@+id/header_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <!-- Welcome -->
+        <TextView
+            android:id="@+id/text_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome Doctor!"
+            android:textColor="#1F2D3D"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/header_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"/>
+
+        <!-- Doctor icon -->
+        <ImageView
+            android:id="@+id/image_doctor"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/ic_doctor_professional"
+            app:layout_constraintTop_toBottomOf="@id/text_welcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"/>
+
+        <!-- ===== Login Card ===== -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="8dp"
+            app:layout_constraintTop_toBottomOf="@id/image_doctor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:text="Select your Name"
+                    android:textColor="#5A6B7B"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Spinner
+                    android:id="@+id/spinner_doctors_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/edittext_rounded"/>
+
+                <EditText
+                    android:id="@+id/edit_text_doctor_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="14dp"
+                    android:hint="Enter Password"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:background="@drawable/edittext_rounded"/>
+
+                <Button
+                    android:id="@+id/button_doctor_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="20dp"
+                    android:text="LOG IN"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/button_blue_rounded"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

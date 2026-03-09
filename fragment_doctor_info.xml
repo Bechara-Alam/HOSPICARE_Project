@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <!-- Top gradient header -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/bg_doctor_header_gradient">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_doctor_info"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/doctor_avatar"
+            android:padding="4dp"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@android:color/white" />
+
+    </LinearLayout>
+
+
+    <!-- Doctor name -->
+    <TextView
+        android:id="@+id/text_view_name_doctor_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Dr Adiveppa Hosangadi"
+        android:textColor="#111827"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Specialty -->
+    <TextView
+        android:id="@+id/text_view_field_doctor_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_name_doctor_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="6dp"
+        android:text="Orthopedics"
+        android:textColor="#2563EB"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <!-- Qualification card -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_field_doctor_info"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Qualifications"
+                android:textColor="#6B7280"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_qualification_doctor_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="MBBS MS(Ortho)"
+                android:textColor="#111827"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- Bottom Book Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_doctor_book_appointment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:text="Book An Appointment"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        app:cornerRadius="30dp"
+        android:backgroundTint="#2563EB" />
+
+</RelativeLayout>

@@ -1,0 +1,17 @@
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="12dp" app:cardCornerRadius="20dp" app:cardElevation="8dp" app:strokeWidth="0dp">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="18dp">
+        <!--  Doctor Image  -->
+        <de.hdodenhof.circleimageview.CircleImageView android:id="@+id/imageDoctor" android:layout_width="64dp" android:layout_height="64dp" android:src="@drawable/doctor1" android:scaleType="centerCrop" app:civ_border_width="2dp" app:civ_border_color="#E2E8F0" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+        <!--  Doctor Name  -->
+        <TextView android:id="@+id/textDoctorName" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Dr. Adiveppa Hosangadi" android:textSize="18sp" android:textStyle="bold" android:textColor="#0F172A" app:layout_constraintStart_toEndOf="@id/imageDoctor" app:layout_constraintTop_toTopOf="@id/imageDoctor" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"/>
+        <!--  Date Icon  -->
+        <ImageView android:id="@+id/iconDate" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_calendar" app:layout_constraintStart_toStartOf="@id/textDoctorName" app:layout_constraintTop_toBottomOf="@id/textDoctorName" android:layout_marginTop="12dp"/>
+        <!--  Date Text  -->
+        <TextView android:id="@+id/textDate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Feb 5, 2026" android:textSize="15sp" android:textColor="#475569" app:layout_constraintStart_toEndOf="@id/iconDate" app:layout_constraintTop_toTopOf="@id/iconDate" android:layout_marginStart="8dp"/>
+        <!--  Time Icon  -->
+        <ImageView android:id="@+id/iconTime" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_clock" app:layout_constraintStart_toStartOf="@id/textDoctorName" app:layout_constraintTop_toBottomOf="@id/iconDate" android:layout_marginTop="8dp"/>
+        <!--  Time Text  -->
+        <TextView android:id="@+id/textTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="11:15 - 11:30 AM" android:textSize="15sp" android:textColor="#475569" app:layout_constraintStart_toEndOf="@id/iconTime" app:layout_constraintTop_toTopOf="@id/iconTime" android:layout_marginStart="8dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

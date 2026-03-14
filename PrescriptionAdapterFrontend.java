@@ -14,61 +14,104 @@ import com.example.tatwa10.R;
 
 import java.util.List;
 
-public class PrescriptionAdapterFrontend
-        extends RecyclerView.Adapter<PrescriptionAdapterFrontend.ViewHolder> {
+public class PrescriptionAdapterFrontend extends RecyclerView.Adapter<PrescriptionAdapterFrontend.PrescriptionViewHolder> {
 
-    private List<Prescription> list;
+    private List<Prescription> prescriptionList;
+    private OnItemClickListener listener;
 
-    public PrescriptionAdapterFrontend(List<Prescription> list) {
-        this.list = list;
+    // ✅ Correct Constructor
+    public PrescriptionAdapterFrontend(List<Prescription> prescriptionList) {
+        this.prescriptionList = prescriptionList;
+    }
+
+    // Click listener setter
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PrescriptionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.prescription_item, parent, false);
-        return new ViewHolder(view);
+
+        return new PrescriptionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PrescriptionViewHolder holder, int position) {
 
-        Prescription p = list.get(position);
+        Prescription prescription = prescriptionList.get(position);
 
-        holder.textViewDoctorName.setText(p.getDoctorName());
-        holder.textViewMedicineName.setText(p.getMedicineName());
-        holder.textViewDateStart.setText(p.getDateStart());
-        holder.textViewDateEnd.setText(p.getDateEnd());
-        holder.textViewDuration.setText(p.getDuration() + " Days");
+        holder.textViewDoctorName.setText(prescription.getDoctorName());
+        holder.textViewMedicineName.setText(prescription.getMedicineName());
 
-        if (p.isBreakfast()) holder.buttonBreakfast.setVisibility(View.VISIBLE);
-        if (p.isLunch()) holder.buttonLunch.setVisibility(View.VISIBLE);
-        if (p.isDinner()) holder.buttonDinner.setVisibility(View.VISIBLE);
+        holder.textViewDateStart.setText(prescription.getDateStart());
+        holder.textViewDateEnd.setText(prescription.getDateEnd());
+
+        String duration = prescription.getDuration() + " Days";
+        holder.textViewDuration.setText(duration);
+
+        // Reset visibility for RecyclerView reuse
+        holder.buttonBreakfast.setVisibility(View.GONE);
+        holder.buttonLunch.setVisibility(View.GONE);
+        holder.buttonDinner.setVisibility(View.GONE);
+
+        if (prescription.isBreakfast())
+            holder.buttonBreakfast.setVisibility(View.VISIBLE);
+
+        if (prescription.isLunch())
+            holder.buttonLunch.setVisibility(View.VISIBLE);
+
+        if (prescription.isDinner())
+            holder.buttonDinner.setVisibility(View.VISIBLE);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return prescriptionList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    // ✅ ViewHolder
+    class PrescriptionViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewDoctorName, textViewMedicineName,
-                textViewDateStart, textViewDateEnd, textViewDuration;
-        Button buttonBreakfast, buttonLunch, buttonDinner;
+        private TextView textViewDoctorName;
+        private TextView textViewMedicineName;
+        private Button buttonBreakfast;
+        private Button buttonLunch;
+        private Button buttonDinner;
+        private TextView textViewDateStart;
+        private TextView textViewDateEnd;
+        private TextView textViewDuration;
 
-        public ViewHolder(@NonNull View itemView) {
+        public PrescriptionViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewDoctorName = itemView.findViewById(R.id.text_view_doctor_prescribed_by);
             textViewMedicineName = itemView.findViewById(R.id.text_view_medicine_name);
+
             buttonBreakfast = itemView.findViewById(R.id.button_breakfast);
             buttonLunch = itemView.findViewById(R.id.button_lunch);
             buttonDinner = itemView.findViewById(R.id.button_dinner);
+
             textViewDateStart = itemView.findViewById(R.id.text_view_date_start);
             textViewDateEnd = itemView.findViewById(R.id.text_view_date_end);
             textViewDuration = itemView.findViewById(R.id.text_view_item_medicine_duration);
+
+            itemView.setOnClickListener(v -> {
+
+                int position = getAdapterPosition();
+
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(prescriptionList.get(position), position);
+                }
+            });
         }
+    }
+
+    // Interface for click events
+    public interface OnItemClickListener {
+        void onItemClick(Prescription prescription, int position);
     }
 }

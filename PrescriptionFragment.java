@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tatwa10.Adapters.PrescriptionAdapterFrontend;
 import com.example.tatwa10.ModelClass.Prescription;
 import com.example.tatwa10.R;

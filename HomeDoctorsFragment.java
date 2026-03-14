@@ -22,6 +22,7 @@ public class HomeDoctorsFragment extends Fragment {
     private Button buttonApproveAppointment;
     private Button buttonPendingAppointment;
     private Button buttonCompletedAppointment;
+    private Button buttonHistory;
     private Button buttonPatientPrescription;
 
     // Laboratory Buttons
@@ -48,6 +49,7 @@ public class HomeDoctorsFragment extends Fragment {
         buttonApproveAppointment = view.findViewById(R.id.button_approve_appointments);
         buttonPendingAppointment = view.findViewById(R.id.button_pending_appointments);
         buttonCompletedAppointment = view.findViewById(R.id.button_completed_appointments);
+        buttonHistory = view.findViewById(R.id.button_history);
         buttonPatientPrescription = view.findViewById(R.id.button_your_patients);
 
         // Initialize Laboratory Buttons
@@ -76,6 +78,16 @@ public class HomeDoctorsFragment extends Fragment {
                 getParentFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container_doctor, new CompletedAppointmentFragment())
+                        .addToBackStack(null)
+                        .commit()
+        );
+
+        // ================= HISTORY =================
+
+        buttonHistory.setOnClickListener(v ->
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container_doctor, new HistoryFragment())
                         .addToBackStack(null)
                         .commit()
         );

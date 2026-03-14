@@ -1,0 +1,161 @@
+package com.example.tatwa10.Fragments;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.tatwa10.MainActivity;
+import com.example.tatwa10.PaymentActivity;
+import com.example.tatwa10.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.datepicker.MaterialDatePicker;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class BookAppointmentFragment extends Fragment {
+
+    private ProgressDialog dialog;
+    private Spinner spinnerDoctorsList;
+    private MaterialButton buttonPayment;
+    private ChipGroup chipGroupSlots;
+    private TextView textSelectedDate;
+
+    private String selectedDate = "";
+    private String selectedTime = "";
+
+    public static final String[] times = {
+            "10:00 - 10:15 AM","10:15 - 10:30 AM","10:30 - 10:45 AM","10:45 - 11:00 AM",
+            "11:00 - 11:15 AM","11:15 - 11:30 AM","11:30 - 11:45 AM","11:45 - 12:00 PM",
+            "12:00 - 12:15 PM","12:15 - 12:30 PM","12:30 - 12:45 PM","12:45 - 1:00 PM"
+    };
+
+    private List<String> availableSlots;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_book_appointment, container, false);
+
+        dialog = new ProgressDialog(getContext());
+        dialog.setMessage("Loading Available Slots...");
+
+        spinnerDoctorsList = view.findViewById(R.id.spinner_appointment_doctors);
+        buttonPayment = view.findViewById(R.id.button_proceed_payment);
+        chipGroupSlots = view.findViewById(R.id.chipGroupSlots);
+        textSelectedDate = view.findViewById(R.id.textSelectedDate);
+
+        setupDoctors();
+        setupCalendar(view);
+        loadSlots();
+        setupChipSelection();
+
+        buttonPayment.setOnClickListener(v -> goToPayment());
+
+        return view;
+    }
+
+    private void setupDoctors() {
+        String[] names = getResources().getStringArray(R.array.doctors_name);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                names
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDoctorsList.setAdapter(adapter);
+    }
+
+    private void setupCalendar(View view) {
+
+        MaterialDatePicker<Long> datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                        .setTitleText("Select appointment date")
+                        .build();
+
+        view.findViewById(R.id.layoutCalendarClick).setOnClickListener(v ->
+                datePicker.show(getParentFragmentManager(), "DATE_PICKER")
+        );
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            selectedDate = datePicker.getHeaderText();
+            textSelectedDate.setText(selectedDate);
+        });
+    }
+
+    private void loadSlots() {
+
+        dialog.show();
+
+        availableSlots = new ArrayList<>(Arrays.asList(times));
+
+        availableSlots.remove(0);
+        availableSlots.remove(3);
+
+        chipGroupSlots.removeAllViews();
+
+        for (String slot : availableSlots) {
+            Chip chip = new Chip(getContext());
+            chip.setText(slot);
+            chip.setCheckable(true);
+            chip.setClickable(true);
+            chip.setChipBackgroundColorResource(R.color.chip_bg_selector);
+            chip.setTextColor(getResources().getColorStateList(R.color.chip_text_selector));
+            chipGroupSlots.addView(chip);
+        }
+
+        dialog.dismiss();
+    }
+
+    private void setupChipSelection() {
+        chipGroupSlots.setOnCheckedChangeListener((group, checkedId) -> {
+            Chip chip = group.findViewById(checkedId);
+            if (chip != null) {
+                selectedTime = chip.getText().toString();
+            }
+        });
+    }
+
+    private void goToPayment() {
+
+        if (selectedDate.isEmpty()) {
+            Toast.makeText(getContext(), "Please select a date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (selectedTime.isEmpty()) {
+            Toast.makeText(getContext(), "Please select a time slot", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String doctorName = spinnerDoctorsList.getSelectedItem().toString();
+
+        Intent intent = new Intent(getActivity(), PaymentActivity.class);
+
+        intent.putExtra("doctor", doctorName);
+        intent.putExtra("date", selectedDate);
+        intent.putExtra("time", selectedTime);
+        intent.putExtra("patientName", MainActivity.patientName);
+
+        startActivity(intent);
+    }
+}

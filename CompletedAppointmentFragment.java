@@ -17,6 +17,7 @@ import com.example.tatwa10.DoctorMainActivity;
 import com.example.tatwa10.ModelClass.Appointment;
 import com.example.tatwa10.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompletedAppointmentFragment extends Fragment {
@@ -24,8 +25,7 @@ public class CompletedAppointmentFragment extends Fragment {
     private RecyclerView recyclerView;
     private CompletedAppointmentAdapter adapter;
 
-    // 🔹 Shared list from repository
-    private List<Appointment> completedAppointments;
+    private List<Appointment> completedAppointments = new ArrayList<>();
 
     @Nullable
     @Override
@@ -33,35 +33,38 @@ public class CompletedAppointmentFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_completed_appointment, container, false);
+
+        // Set navigation state
         DoctorMainActivity.navigationView.setCheckedItem(R.id.nav_completed_appointment2);
         DoctorMainActivity.currentFragment = "completed_appointment";
 
-        View view = inflater.inflate(R.layout.fragment_completed_appointment, container, false);
-
         recyclerView = view.findViewById(R.id.recycler_view_completed_appointment);
 
-        buildRecyclerView();
+        setupRecyclerView();
 
         return view;
     }
 
-    private void buildRecyclerView() {
+    private void setupRecyclerView() {
 
-        // ✅ Use shared repository list (IMPORTANT)
-        completedAppointments = AppointmentRepository.completedAppointments;
+        // Get list from repository safely
+        if (AppointmentRepository.completedAppointments != null) {
+            completedAppointments = AppointmentRepository.completedAppointments;
+        }
 
         adapter = new CompletedAppointmentAdapter(completedAppointments);
 
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }
 
-    // 🔹 Refresh list when fragment becomes visible
     @Override
     public void onResume() {
         super.onResume();
 
+        // Refresh list when returning to this screen
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }

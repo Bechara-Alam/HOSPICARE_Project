@@ -10,7 +10,7 @@ This project was developed to simplify hospital workflows and improve the access
 
 - Java
 - XML
-- MySQL
+- SqlServer
 - Android Development
 - Git / GitHub
 

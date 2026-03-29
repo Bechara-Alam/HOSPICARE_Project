@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F7F8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room Reservation"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- ✅ MATCH -->
+        <EditText
+            android:id="@+id/edit_patient_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Patient Name"
+            android:padding="12dp"/>
+
+        <!-- ✅ MATCH -->
+        <GridView
+            android:id="@+id/grid_rooms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="2"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:layout_marginTop="16dp"/>
+        <!-- ✅ MATCH -->
+        <EditText
+            android:id="@+id/edit_date"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Select Date"
+            android:focusable="false"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"/>
+
+        <!-- ✅ MATCH -->
+        <Button
+            android:id="@+id/btn_reserve"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Reserve Room"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

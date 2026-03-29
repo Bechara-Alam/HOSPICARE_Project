@@ -1,30 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F6FB">
+    android:orientation="vertical"
+    android:background="#F3F6FB"
+    android:padding="12dp">
 
+    <!-- 🔍 SEARCH -->
+    <EditText
+        android:id="@+id/edit_search_patient"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter Patient ID"
+        android:inputType="number"
+        android:padding="12dp"
+        android:background="@android:drawable/editbox_background" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_patients"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+
+    <!-- 🧑 PATIENT INFO -->
+    <LinearLayout
+        android:id="@+id/layout_patient_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:background="#FFFFFF"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/text_dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DOB:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_national_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="National ID:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_blood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Blood Type:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_allergies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Allergies:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_disease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Diseases:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_medications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medications:"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/text_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address:"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+    <!-- 📋 LIST -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_prescription_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
-        android:clipToPadding="false"
-        android:padding="12dp"
-        tools:listitem="@layout/doctors_prescription_item"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="10dp"
+        android:clipToPadding="false"/>
 
+    <!-- ➕ BUTTON -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_add_prescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_add"
         app:backgroundTint="#3B82F6"
         app:tint="@android:color/white"/>
 
-</RelativeLayout>
+</LinearLayout>

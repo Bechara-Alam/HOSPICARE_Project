@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/image_view_doctor"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/ic_doctor"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_circle_light"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_doctor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dr Name"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/text_view_doctor_specialization"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cardiology"
+                android:textColor="#2563EB"/>
+
+            <TextView
+                android:id="@+id/text_view_doctor_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="76123456"
+                android:textColor="#6B7280"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

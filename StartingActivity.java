@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
+
+import com.google.android.material.card.MaterialCardView;
 
 public class StartingActivity extends AppCompatActivity {
 
-    private Button buttonDoctor;
-    private Button buttonPatient;
+    private MaterialCardView buttonDoctor;
+    private MaterialCardView buttonPatient;
 
     public static final String SHARED_PREFERENCES = "shared_prefs";
     public static final String KEY_DOCTOR_NAME = "name";

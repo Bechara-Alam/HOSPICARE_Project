@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F1F5F9"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- TITLE -->
+    <TextView
+        android:text="Hospital Admin Panel"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- BUTTON 1 -->
+    <Button
+        android:id="@+id/btn_reservation"
+        android:text="Room Reservation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- BUTTON 2 -->
+    <Button
+        android:id="@+id/btn_create_account"
+        android:text="Create Account"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"/>
+
+</LinearLayout>

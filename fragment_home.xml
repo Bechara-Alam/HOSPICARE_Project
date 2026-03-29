@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EDEFF2">
+    android:background="#F8F9FA">
 
-    <!-- ================= HEADER ================= -->
+    <!-- HERO IMAGE -->
     <FrameLayout
         android:id="@+id/header"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="260dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -18,163 +18,270 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/hosp"/>
+            android:src="@mipmap/hosp"
+            android:scaleType="centerCrop"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#66000000"/>
+            android:background="@drawable/bg_header_overlay"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:text="Welcome"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/text_patient_name"
-                android:text="Patient Name"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
     </FrameLayout>
 
-    <!-- ================= SCROLLABLE CONTENT ================= -->
-    <androidx.core.widget.NestedScrollView
+    <!-- CONTENT -->
+    <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="-40dp"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fillViewport="true">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:text="Patient Services"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#2C3E50"
-                android:layout_marginBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <!-- EMERGENCY -->
 
-            <Button
+            <!-- GRID -->
+
+            <LinearLayout
                 android:id="@+id/button_emergency"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Emergency • Call Ambulance"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_book_appointment"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Book Appointment"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_find_doctors"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Find Doctors"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_view_prescriptions"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="View Prescriptions"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_medical_records"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Medical Records"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-            <!-- ================= LABORATORY SECTION ================= -->
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_emergency"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_emergency"
+                app:tint="@android:color/white" />
 
             <TextView
-                android:text="Laboratory Services"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#2C3E50"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/button_book_lab"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Book Lab Test"
-                android:textAllCaps="false"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Emergency • Call Ambulance"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_lab_results"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="My Lab Results"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
-            <Button
-                android:id="@+id/button_home_collection"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/button_blue_rounded"
-                android:text="Home Sample Collection"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"/>
-
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+            <GridLayout
+                android:columnCount="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- CARD -->
+                <LinearLayout
+                    android:id="@+id/button_book_appointment"
+                    android:background="@drawable/bg_card"
+                    android:foreground="@drawable/ripple_card"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="6dp"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:src="@drawable/ic_appointment"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Book Appointment"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_find_doctors"
+                    android:background="@drawable/bg_card"
+                    android:foreground="@drawable/ripple_card"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="6dp"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:src="@drawable/ic_doctor"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Find Doctors"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_view_prescriptions"
+                    android:background="@drawable/bg_card"
+                    android:foreground="@drawable/ripple_card"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="6dp"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:src="@drawable/ic_prescription"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View Prescriptions"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_medical_records"
+                    android:background="@drawable/bg_card"
+                    android:foreground="@drawable/ripple_card"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_margin="6dp"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:src="@drawable/ic_records"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medical Records"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+            </GridLayout>
+
+            <!-- NOTIFICATIONS -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:id="@+id/button_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card"
+                    android:foreground="@drawable/ripple_card"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:src="@drawable/ic_notification"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recent Activity &amp; Notifications"
+                        android:layout_marginStart="12dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/notification_badge"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/badge_red"/>
+            </FrameLayout>
+
+            <!-- LAB -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Laboratory Services"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/button_book_lab"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_blue_gradient"
+                android:foreground="@drawable/ripple_card"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:src="@drawable/ic_lab"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    app:tint="@android:color/white"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Book Lab Test"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:layout_marginStart="12dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Good Morning,"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alex Johnson"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Your health is our priority today."
+                    android:textColor="#DDFFFFFF"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

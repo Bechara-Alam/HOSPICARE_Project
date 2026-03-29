@@ -1,137 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_button_border"
-    android:padding="16dp"
-    tools:context=".AddProfileActivity">
+    android:background="#F9F9FC"
+    android:fillViewport="true">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_view_profile"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/male" />
-
-    <EditText
-        android:id="@+id/edit_text_profile_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/image_view_profile"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button_border"
-        android:hint="Enter Your Name"
-        android:inputType="textCapWords"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
 
-    <EditText
-        android:id="@+id/edit_text_profile_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_profile_name"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button_border"
-        android:hint="Enter Your Email"
-        android:inputType="textEmailAddress"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/text_view_profile_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_profile_email"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button_border"
-        android:padding="8dp"
-        android:text="Phone Number :   8147921339"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <RelativeLayout
-        android:id="@+id/r1"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:background="@drawable/custom_button_border"
-        android:layout_width="match_parent"
-        android:layout_below="@id/text_view_profile_number"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/t01"
-            android:text="Sex"
-            android:textStyle="bold"
-            android:layout_marginStart="12dp"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-
-        <RadioGroup
-            android:id="@+id/radio_group_profile_sex"
+        <!-- HEADER -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toEndOf="@id/t01">
+            android:padding="20dp">
 
-            <RadioButton
-                android:id="@+id/radio_button_profile_male"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:checked="true"
-                android:text="Male"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="Add Profile"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
-            <RadioButton
-                android:id="@+id/radio_button_profile_female"
-                android:layout_width="wrap_content"
+        <!-- PROFILE IMAGE -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/image_view_profile"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/doctor1"
+                android:background="@drawable/bg_circle"
+                android:elevation="6dp"/>
+
+
+        </FrameLayout>
+
+        <!-- FORM -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- NAME -->
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/radio_button_profile_male"
-                android:text="Female"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </RadioGroup>
+                android:text="Full Name"
+                android:textColor="#6B7280"
+                android:textSize="13sp"/>
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/edit_text_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="6dp"
+                android:hint="Enter Your Name"
+                android:background="@drawable/bg_input"
+                android:padding="15dp"/>
 
+            <!-- EMAIL -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:textColor="#6B7280"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"/>
 
+            <EditText
+                android:id="@+id/edit_text_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="6dp"
+                android:hint="Enter Your Email"
+                android:background="@drawable/bg_input"
+                android:padding="15dp"/>
 
-    <EditText
-        android:id="@+id/edit_text_profile_age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/r1"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button_border"
-        android:hint="Enter Your Age"
-        android:inputType="number"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+            <!-- PHONE -->
+            <LinearLayout
+                android:id="@+id/text_view_profile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_card">
 
-    <Button
-        android:id="@+id/button_profile_continue_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/custom_button_border_2"
-        android:text="Continue"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_call"
 
-</RelativeLayout>
+                    android:padding="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registered Phone"
+                        android:textSize="12sp"
+                        android:textColor="#6B7280"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone Number : 8147921339"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- SEX -->
+            <TextView
+                android:id="@+id/t01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sex"
+                android:textColor="#6B7280"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"/>
+
+            <RadioGroup
+                android:id="@+id/radio_group_profile_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/radio_button_profile_male"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Male"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/radio_button_profile_female"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_radio"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="Female"/>
+            </RadioGroup>
+
+            <!-- AGE -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age"
+                android:textColor="#6B7280"
+                android:textSize="13sp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/edit_text_profile_age"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="6dp"
+                android:hint="Enter Your Age"
+                android:background="@drawable/bg_input"
+                android:padding="15dp"/>
+        </LinearLayout>
+
+        <!-- BUTTON -->
+        <Button
+            android:id="@+id/button_profile_continue_save"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:text="Continue"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:background="@drawable/bg_button"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

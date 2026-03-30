@@ -30,8 +30,10 @@ public class PendingAppointmentAdapter
     @NonNull
     @Override
     public PendingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pending_appointment_item, parent, false);
+
         return new PendingHolder(view);
     }
 
@@ -40,27 +42,34 @@ public class PendingAppointmentAdapter
 
         Appointment appointment = appointmentList.get(position);
 
-        holder.name.setText(appointment.getName());
-        holder.contact.setText(appointment.getId());
-        holder.date.setText(appointment.getAppointmentDate());
-        holder.time.setText(appointment.getAppointmentTime());
+        String name = appointment.getPatientName();
+        if (name == null || name.isEmpty()) name = "Patient";
+
+        holder.name.setText(name);
+        holder.contact.setText("Appointment ID: " + appointment.getId());
+
+        holder.date.setText(appointment.getDate());
+        holder.time.setText(appointment.getTime());
 
         holder.callIcon.setOnClickListener(v -> {
-            if (listener != null) listener.onCallClick(appointment.getId());
+            if (listener != null)
+                listener.onCallClick(String.valueOf(appointment.getId()));
         });
 
         holder.messageIcon.setOnClickListener(v -> {
-            if (listener != null) listener.onMessageClick(appointment.getId());
+            if (listener != null)
+                listener.onMessageClick(String.valueOf(appointment.getId()));
         });
 
         holder.completedBtn.setOnClickListener(v -> {
-            if (listener != null) listener.onCompletedClick(appointment, position);
+            if (listener != null)
+                listener.onCompletedClick(appointment, position);
         });
     }
 
     @Override
     public int getItemCount() {
-        return appointmentList.size();
+        return appointmentList == null ? 0 : appointmentList.size();
     }
 
     static class PendingHolder extends RecyclerView.ViewHolder {

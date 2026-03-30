@@ -39,7 +39,7 @@ public class BookAppointmentFragment extends Fragment {
     private MaterialButton buttonPayment;
     private ChipGroup chipGroupSlots;
     private TextView textSelectedDate;
-
+    private List<Doctor> doctorsList = new ArrayList<>();
     private String selectedDate = "";
     private String selectedTime = "";
 
@@ -63,7 +63,7 @@ public class BookAppointmentFragment extends Fragment {
         dialog.setMessage("Loading Available Slots...");
 
         spinnerDoctorsList = view.findViewById(R.id.spinner_appointment_doctors);
-
+        buttonPayment = view.findViewById(R.id.button_proceed_payment);
         chipGroupSlots = view.findViewById(R.id.chipGroupSlots);
         textSelectedDate = view.findViewById(R.id.textSelectedDate);
 
@@ -95,9 +95,11 @@ public class BookAppointmentFragment extends Fragment {
 
                 if (doctors == null) doctors = new ArrayList<>();
 
+                doctorsList = doctors; // ⭐ IMPORTANT
+
                 List<String> names = new ArrayList<>();
 
-                for (Doctor doctor : doctors) {
+                for (Doctor doctor : doctorsList) {
                     names.add(doctor.getFullName());
                 }
 
@@ -202,13 +204,25 @@ public class BookAppointmentFragment extends Fragment {
             return;
         }
 
-        String doctorName = spinnerDoctorsList.getSelectedItem().toString();
+        int position = spinnerDoctorsList.getSelectedItemPosition();
+
+        if (position < 0 || position >= doctorsList.size()) {
+            Toast.makeText(getContext(), "Please select a doctor", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Doctor selectedDoctor = doctorsList.get(position);
 
         Intent intent = new Intent(getActivity(), PaymentActivity.class);
 
-        intent.putExtra("doctorName", doctorName);
+        // ✅ IMPORTANT DATA
+        intent.putExtra("doctorId", selectedDoctor.getId());
+        intent.putExtra("doctorName", selectedDoctor.getFullName());
+
         intent.putExtra("date", selectedDate);
         intent.putExtra("time", selectedTime);
+
+        intent.putExtra("patientId", MainActivity.patientId);
         intent.putExtra("patientName", MainActivity.patientName);
 
         startActivity(intent);

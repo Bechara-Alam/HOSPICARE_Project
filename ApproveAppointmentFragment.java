@@ -1,7 +1,7 @@
 package com.example.tatwa10.FragmentDoctors;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tatwa10.Adapters.ApproveAppointmentAdapter;
-import com.example.tatwa10.AppointmentStorage;
-import com.example.tatwa10.DoctorMainActivity;
+import com.example.tatwa10.ApiService;
 import com.example.tatwa10.ModelClass.Appointment;
 import com.example.tatwa10.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ApproveAppointmentFragment extends Fragment {
 
-    private RecyclerView recyclerViewAppointmentList;
+    private RecyclerView recyclerView;
     private ApproveAppointmentAdapter adapter;
-    private List<Appointment> appointmentList;
+    private final List<Appointment> appointmentList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -36,77 +38,137 @@ public class ApproveAppointmentFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_approve_appointment, container, false);
 
-        recyclerViewAppointmentList = view.findViewById(R.id.recycler_view_approve_appointment);
+        recyclerView = view.findViewById(R.id.recycler_view_approve_appointment);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        buildRecyclerView();
+        adapter = new ApproveAppointmentAdapter(appointmentList, listener);
+        recyclerView.setAdapter(adapter);
+
+        loadAppointments();
 
         return view;
     }
 
-    private void buildRecyclerView() {
+    // =============================
+    // LOAD REQUESTED APPOINTMENTS
+    // =============================
 
-        appointmentList = new ArrayList<>();
+    private void loadAppointments() {
 
-        // Make sure storage is not null
-        if (AppointmentStorage.appointmentList != null) {
+        new Thread(() -> {
 
-            for (Appointment appointment : AppointmentStorage.appointmentList) {
+            try {
 
-                if (appointment.getDoctorName() != null &&
-                        appointment.getDoctorName().equals(DoctorMainActivity.doctorName)) {
+                String response = ApiService.getRequestedAppointments();
 
-                    appointmentList.add(appointment);
+                Log.d("API_APPROVE", response);
+
+                if (response == null || response.isEmpty()) {
+                    Log.e("API_ERROR", "Empty API response");
+                    return;
+                }
+
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<Appointment>>(){}.getType();
+
+                List<Appointment> list = gson.fromJson(response, listType);
+
+                if (list == null) list = new ArrayList<>();
+
+                appointmentList.clear();
+                appointmentList.addAll(list);
+
+                if (getActivity() == null) return;
+
+                getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
+
+            } catch (Exception e) {
+
+                Log.e("API_ERROR", "Fragment crash: " + e.getMessage());
+
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(() ->
+                            Toast.makeText(getContext(),
+                                    "Error loading appointments",
+                                    Toast.LENGTH_LONG).show());
                 }
             }
-        }
 
-        adapter = new ApproveAppointmentAdapter(appointmentList,
-                new ApproveAppointmentAdapter.OnItemClickListener() {
-
-                    @Override
-                    public void onAcceptClick(int position) {
-
-                        if (getContext() == null) return;
-
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Accept")
-                                .setMessage("Are you sure you want to accept this appointment?")
-                                .setPositiveButton("Yes", (dialog, which) -> {
-
-                                    appointmentList.get(position).setAppointmentAccepted(true);
-                                    adapter.notifyItemChanged(position);
-
-                                    Toast.makeText(getContext(),
-                                            "Appointment Accepted",
-                                            Toast.LENGTH_SHORT).show();
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }
-
-                    @Override
-                    public void onRejectClick(int position) {
-
-                        if (getContext() == null) return;
-
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Reject")
-                                .setMessage("Are you sure you want to reject this appointment?")
-                                .setPositiveButton("Yes", (dialog, which) -> {
-
-                                    appointmentList.remove(position);
-                                    adapter.notifyItemRemoved(position);
-
-                                    Toast.makeText(getContext(),
-                                            "Appointment Rejected",
-                                            Toast.LENGTH_SHORT).show();
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }
-                });
-
-        recyclerViewAppointmentList.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewAppointmentList.setAdapter(adapter);
+        }).start();
     }
+
+    // =============================
+    // BUTTON LISTENER
+    // =============================
+
+    private final ApproveAppointmentAdapter.OnItemClickListener listener =
+            new ApproveAppointmentAdapter.OnItemClickListener() {
+
+                @Override
+                public void onAcceptClick(int position) {
+
+                    Appointment a = appointmentList.get(position);
+
+                    new Thread(() -> {
+
+                        try {
+
+                            ApiService.acceptAppointment(a.getId());
+
+                            if (getActivity() == null) return;
+
+                            getActivity().runOnUiThread(() -> {
+
+                                Toast.makeText(getContext(),
+                                        "Appointment Accepted",
+                                        Toast.LENGTH_SHORT).show();
+
+                                // ✅ REMOVE ITEM FROM LIST
+                                appointmentList.remove(position);
+                                adapter.notifyItemRemoved(position);
+
+                            });
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }).start();
+                }
+
+
+
+
+                @Override
+                public void onRejectClick(int position) {
+
+                    Appointment a = appointmentList.get(position);
+
+                    new Thread(() -> {
+
+                        try {
+
+                            ApiService.rejectAppointment(a.getId());
+
+                            if (getActivity() == null) return;
+
+                            getActivity().runOnUiThread(() -> {
+
+                                Toast.makeText(getContext(),
+                                        "Appointment Rejected",
+                                        Toast.LENGTH_SHORT).show();
+
+                                // ✅ REMOVE ITEM FROM LIST
+                                appointmentList.remove(position);
+                                adapter.notifyItemRemoved(position);
+
+                            });
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }).start();
+                }
+            };
 }

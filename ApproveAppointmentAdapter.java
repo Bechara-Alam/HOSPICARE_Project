@@ -1,5 +1,6 @@
 package com.example.tatwa10.Adapters;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.example.tatwa10.ModelClass.Appointment;
 import com.example.tatwa10.R;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApproveAppointmentAdapter
@@ -22,15 +24,22 @@ public class ApproveAppointmentAdapter
 
     public ApproveAppointmentAdapter(List<Appointment> appointmentList,
                                      OnItemClickListener listener) {
-        this.appointmentList = appointmentList;
+
+        if (appointmentList == null)
+            this.appointmentList = new ArrayList<>();
+        else
+            this.appointmentList = appointmentList;
+
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public AppointmentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.approve_appointment_item, parent, false);
+
         return new AppointmentHolder(view);
     }
 
@@ -39,24 +48,30 @@ public class ApproveAppointmentAdapter
 
         Appointment appointment = appointmentList.get(position);
 
-        // Patient name
-        holder.textViewPatientName.setText(appointment.getName());
+        if (appointment == null) return;
 
-        // Contact number
-        holder.textViewContactNo.setText("Contact · " + appointment.getId());
+        String patientName = appointment.getPatientName();
+        if (patientName == null || patientName.isEmpty()) {
+            patientName = "Patient";
+        }
 
-        // Date + Time combined
-        String dateTime = appointment.getAppointmentDate()
-                + " · " + appointment.getAppointmentTime();
-        holder.textViewDateTime.setText(dateTime);
+        holder.textViewPatientName.setText(patientName);
+        holder.textViewContactNo.setText("Appointment ID · " + appointment.getId());
 
-        // Status
-        holder.textViewStatus.setText("Pending");
+        String date = appointment.getDate() == null ? "" : appointment.getDate();
+        String time = appointment.getTime() == null ? "" : appointment.getTime();
 
-        // ⭐ SHOW INITIALS AVATAR
-        String initials = getInitials(appointment.getName());
-        holder.textAvatar.setText(initials);
-        holder.textAvatar.getBackground().setTint(getColorFromName(appointment.getName()));
+        holder.textViewDateTime.setText(date + " · " + time);
+        holder.textViewStatus.setText("Requested");
+
+        // Avatar initials
+        holder.textAvatar.setText(getInitials(patientName));
+
+        Drawable bg = holder.textAvatar.getBackground();
+
+        if (bg != null) {
+            bg.setTint(getColorFromName(patientName));
+        }
     }
 
     @Override
@@ -64,15 +79,20 @@ public class ApproveAppointmentAdapter
         return appointmentList.size();
     }
 
+    // ===============================
+    // VIEW HOLDER
+    // ===============================
+
     class AppointmentHolder extends RecyclerView.ViewHolder {
 
         TextView textViewPatientName;
         TextView textViewContactNo;
         TextView textViewDateTime;
         TextView textViewStatus;
-        TextView textAvatar;   // ⭐ NEW
+        TextView textAvatar;
 
-        MaterialButton buttonAccept, buttonReject;
+        MaterialButton buttonAccept;
+        MaterialButton buttonReject;
 
         public AppointmentHolder(@NonNull View itemView) {
             super(itemView);
@@ -89,7 +109,7 @@ public class ApproveAppointmentAdapter
             textViewStatus =
                     itemView.findViewById(R.id.chip_status);
 
-            textAvatar =                      // ⭐ NEW
+            textAvatar =
                     itemView.findViewById(R.id.text_avatar);
 
             buttonAccept =
@@ -99,30 +119,42 @@ public class ApproveAppointmentAdapter
                     itemView.findViewById(R.id.button_item_reject_appointment);
 
             buttonAccept.setOnClickListener(v -> {
-                int pos = getAdapterPosition();
-                if (listener != null && pos != RecyclerView.NO_POSITION) {
-                    listener.onAcceptClick(pos);
+
+                int position = getAdapterPosition();
+
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onAcceptClick(position);
                 }
             });
 
             buttonReject.setOnClickListener(v -> {
-                int pos = getAdapterPosition();
-                if (listener != null && pos != RecyclerView.NO_POSITION) {
-                    listener.onRejectClick(pos);
+
+                int position = getAdapterPosition();
+
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onRejectClick(position);
                 }
             });
         }
     }
+
+    // ===============================
+    // CLICK INTERFACE
+    // ===============================
 
     public interface OnItemClickListener {
         void onAcceptClick(int position);
         void onRejectClick(int position);
     }
 
-    // ================= INITIALS METHODS =================
+    // ===============================
+    // INITIALS GENERATOR
+    // ===============================
 
     private String getInitials(String name) {
-        if (name == null || name.trim().isEmpty()) return "?";
+
+        if (name == null || name.trim().isEmpty())
+            return "?";
 
         String[] parts = name.trim().split(" ");
 
@@ -133,7 +165,14 @@ public class ApproveAppointmentAdapter
                 + parts[1].substring(0, 1)).toUpperCase();
     }
 
+    // ===============================
+    // COLOR GENERATOR
+    // ===============================
+
     private int getColorFromName(String name) {
+
+        if (name == null) name = "patient";
+
         int[] colors = {
                 0xFFEF4444,
                 0xFF3B82F6,

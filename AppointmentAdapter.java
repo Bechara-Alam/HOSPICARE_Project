@@ -36,8 +36,8 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         Appointment appointment = appointmentList.get(position);
 
         holder.textDoctorName.setText(appointment.getDoctorName());
-        holder.textDate.setText(appointment.getAppointmentDate());
-        holder.textTime.setText(appointment.getAppointmentTime());
+        holder.textDate.setText(appointment.getDate());
+        holder.textTime.setText(appointment.getTime());
     }
 
     @Override

@@ -156,7 +156,11 @@
         <item>Null</item>
         <item>Null</item>
     </string-array>
-
+    <string name="welcome_title">Welcome to HospiCare</string>
+    <string name="select_role">Select Your Role</string>
+    <string name="choose_continue">Choose how you want to continue</string>
+    <string name="continue_doctor">Continue as Doctor</string>
+    <string name="continue_patient">Continue as Patient</string>
     <!--    <string-array name="doctors_description">-->
     <!--        <item>Working as an orthopedic surgeon with sixteen years of surgical experience. we are handling polytrauma patients regularly.I am regularly doing joint replacements both hip and knee at an affordable price.</item>-->
     <!--        <item>Dr. Amruth MBBS. MD (General Medicine) DM (Neurology) Qualification:-MBBS,Karnataka medical college, Hubli.Karnataka university, Dharwad (1995) MD (General Medicine) : M.R Medical College,Gulbarga. RGUHS, Bangalore (2000) DM (Neurology) BMCRI, .Bangalore. RGUHS, Bangalore (2012) Special Interest: - in Neuro Critical care and Electrophysiology Field of Expertise:-16Years in Academics and practice Department Details:- Department of Neurology is well equipped with electro-physiology Lab:-Electro encephalography Electro Neuro Myography •	Nerve conduction studies • Visual Evoked Potential •	Brain stem auditory Evoked Potential •	SSEP(Somatosensory evoked potential) • VEMP(Vistibular Evoked potential) •	Trans Cranial Doppler •	Stroke ICU •	Headache clinic •	Epilepsy clinic • EEG,NCS</item>-->

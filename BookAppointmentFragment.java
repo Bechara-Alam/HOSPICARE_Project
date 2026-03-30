@@ -15,14 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.tatwa10.ApiService;
 import com.example.tatwa10.MainActivity;
+import com.example.tatwa10.ModelClass.Doctor;
 import com.example.tatwa10.PaymentActivity;
 import com.example.tatwa10.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,7 +63,7 @@ public class BookAppointmentFragment extends Fragment {
         dialog.setMessage("Loading Available Slots...");
 
         spinnerDoctorsList = view.findViewById(R.id.spinner_appointment_doctors);
-        buttonPayment = view.findViewById(R.id.button_proceed_payment);
+
         chipGroupSlots = view.findViewById(R.id.chipGroupSlots);
         textSelectedDate = view.findViewById(R.id.textSelectedDate);
 
@@ -72,19 +77,57 @@ public class BookAppointmentFragment extends Fragment {
         return view;
     }
 
+    // =========================
+    // LOAD DOCTORS FROM API
+    // =========================
     private void setupDoctors() {
-        String[] names = getResources().getStringArray(R.array.doctors_name);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                getContext(),
-                android.R.layout.simple_spinner_item,
-                names
-        );
+        new Thread(() -> {
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDoctorsList.setAdapter(adapter);
+            try {
+
+                String response = ApiService.getDoctors();
+
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<Doctor>>(){}.getType();
+
+                List<Doctor> doctors = gson.fromJson(response, listType);
+
+                if (doctors == null) doctors = new ArrayList<>();
+
+                List<String> names = new ArrayList<>();
+
+                for (Doctor doctor : doctors) {
+                    names.add(doctor.getFullName());
+                }
+
+                if (getActivity() == null) return;
+
+                getActivity().runOnUiThread(() -> {
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                            getContext(),
+                            android.R.layout.simple_spinner_item,
+                            names
+                    );
+
+                    adapter.setDropDownViewResource(
+                            android.R.layout.simple_spinner_dropdown_item
+                    );
+
+                    spinnerDoctorsList.setAdapter(adapter);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }).start();
     }
 
+    // =========================
+    // DATE PICKER
+    // =========================
     private void setupCalendar(View view) {
 
         MaterialDatePicker<Long> datePicker =
@@ -102,6 +145,9 @@ public class BookAppointmentFragment extends Fragment {
         });
     }
 
+    // =========================
+    // LOAD TIME SLOTS
+    // =========================
     private void loadSlots() {
 
         dialog.show();
@@ -126,15 +172,24 @@ public class BookAppointmentFragment extends Fragment {
         dialog.dismiss();
     }
 
+    // =========================
+    // SELECT SLOT
+    // =========================
     private void setupChipSelection() {
+
         chipGroupSlots.setOnCheckedChangeListener((group, checkedId) -> {
+
             Chip chip = group.findViewById(checkedId);
+
             if (chip != null) {
                 selectedTime = chip.getText().toString();
             }
         });
     }
 
+    // =========================
+    // GO TO PAYMENT
+    // =========================
     private void goToPayment() {
 
         if (selectedDate.isEmpty()) {
@@ -151,7 +206,7 @@ public class BookAppointmentFragment extends Fragment {
 
         Intent intent = new Intent(getActivity(), PaymentActivity.class);
 
-        intent.putExtra("doctor", doctorName);
+        intent.putExtra("doctorName", doctorName);
         intent.putExtra("date", selectedDate);
         intent.putExtra("time", selectedTime);
         intent.putExtra("patientName", MainActivity.patientName);

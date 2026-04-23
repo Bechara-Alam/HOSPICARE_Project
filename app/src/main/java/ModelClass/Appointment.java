@@ -11,20 +11,22 @@ public class Appointment {
 
     @SerializedName("patientId")
     private int patientId;
+
+    @SerializedName("paymentStatus")
     private String paymentStatus;
+
     private String date;
     private String time;
     private String status;
 
-
     @SerializedName("patientName")
     private String patientName;
+
     @SerializedName("doctorName")
     private String doctorName;
-    private String paymentMethod;
 
-    public Appointment(String p1001, String s, String string, String s1, boolean b, boolean b1, String johnSmith, String cash) {
-    }
+    @SerializedName("paymentMethod")
+    private String paymentMethod;
 
     public int getId() {
         return id;
@@ -61,11 +63,8 @@ public class Appointment {
     public String getPaymentMethod() {
         return paymentMethod == null ? "Unknown" : paymentMethod;
     }
+
     public String getPaymentStatus() {
         return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
     }
 }

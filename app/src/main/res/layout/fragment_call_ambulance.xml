@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Call"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#1A1A1A"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"/>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/text_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Tap the button below to call an ambulance immediately."
+        android:textSize="14sp"
+        android:textColor="#6B7280"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="40dp"
+        app:layout_constraintTop_toBottomOf="@id/text_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Circular Call Button -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_call"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="80dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="110dp"
+        app:cardElevation="10dp"
+        app:layout_constraintTop_toBottomOf="@id/text_subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_call"> </ImageView>  <!-- YOUR VECTOR ICON -->
+        android:tint="#2196F3"
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Bottom note -->
+    <TextView
+        android:id="@+id/text_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="For life-threatening emergencies only"
+        android:textSize="12sp"
+        android:textColor="#9CA3AF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

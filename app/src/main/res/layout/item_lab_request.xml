@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Patient -->
+    <TextView
+        android:id="@+id/text_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#2C3E50"/>
+
+    <!-- Test -->
+    <TextView
+        android:id="@+id/text_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test: Blood Test"
+        android:textColor="#555"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Date -->
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: 2026-04-20"
+        android:textColor="#777"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Status -->
+    <TextView
+        android:id="@+id/text_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Requested"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"/>
+
+    <!-- Button -->
+    <Button
+        android:id="@+id/button_process"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Process Request"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_blue_rounded"/>
+
+</LinearLayout>

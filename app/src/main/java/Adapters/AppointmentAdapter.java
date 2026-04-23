@@ -3,6 +3,7 @@ package com.example.tatwa10.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +38,20 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         return new AppointmentHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull AppointmentHolder holder, int position) {
 
         Appointment appointment = appointmentList.get(position);
+        Log.d("CHECK_ITEM",
+                "ID=" + appointment.getId() +
+                        " | PaymentStatus=" + appointment.getPaymentStatus());
 
-        // 🔥 BASIC INFO
+        // 🔥 FIX: reset recycled view
+        holder.buttonPay.setVisibility(View.GONE);
+
+        Log.d("FINAL_STATUS_CHECK", "Status = " + appointment.getPaymentStatus());
+
         holder.textDoctorName.setText(
                 appointment.getDoctorName() != null ? appointment.getDoctorName() : "Doctor"
         );
@@ -55,32 +64,27 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
                 appointment.getTime() != null ? appointment.getTime() : "-"
         );
 
-        // 🔥 PAYMENT STATUS LOGIC
         String paymentStatus = appointment.getPaymentStatus();
+        String status = appointment.getStatus();
 
-        if ("paid".equalsIgnoreCase(paymentStatus)) {
+        if (paymentStatus != null && paymentStatus.equalsIgnoreCase("paid")) {
 
             holder.textPaymentStatus.setText("Payment: Paid");
-            holder.textPaymentStatus.setTextColor(Color.parseColor("#16A34A")); // green
+            holder.textPaymentStatus.setTextColor(Color.parseColor("#16A34A"));
 
-            holder.buttonPay.setVisibility(View.GONE); // hide button
+            holder.buttonPay.setVisibility(View.GONE);
 
         } else {
 
             holder.textPaymentStatus.setText("Payment: Pending");
-            holder.textPaymentStatus.setTextColor(Color.parseColor("#E67E22")); // orange
+            holder.textPaymentStatus.setTextColor(Color.parseColor("#E67E22"));
 
-            // show button ONLY if accepted
-            if ("accepted".equalsIgnoreCase(appointment.getStatus())) {
+            if (status != null && status.equalsIgnoreCase("accepted")) {
                 holder.buttonPay.setVisibility(View.VISIBLE);
-            } else {
-                holder.buttonPay.setVisibility(View.GONE);
             }
         }
 
-        // 🔥 CLICK PAY BUTTON
         holder.buttonPay.setOnClickListener(v -> {
-
             Intent intent = new Intent(context, PaymentActivity.class);
 
             intent.putExtra("appointmentId", appointment.getId());

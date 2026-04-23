@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:background="#FFFFFF"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- START DATE -->
+        <TextView
+            android:id="@+id/text_view_date_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start: 2026-04-10"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- MEDICINE -->
+        <TextView
+            android:id="@+id/text_view_medicine_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Paracetamol 500mg"
+            android:textColor="#1D4ED8"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <!-- NOTE -->
+        <TextView
+            android:id="@+id/text_view_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Note: Take after food"
+            android:textColor="#555555"
+            android:textSize="14sp" />
+
+        <!-- DURATION -->
+        <TextView
+            android:id="@+id/text_view_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Duration: 7 days"
+            android:textColor="#007AFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- DOCTOR NAME -->
+        <TextView
+            android:id="@+id/text_view_doctor_prescribed_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Prescribed by Dr. Ahmed"
+            android:textColor="#10B981"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- END DATE -->
+        <TextView
+            android:id="@+id/text_view_date_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="End: 2026-04-15"
+            android:textColor="#475569"
+            android:textSize="12sp" />
+
+        <!-- TAGS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_breakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#DCFCE7"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Breakfast"
+                android:textColor="#16A34A"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/button_lunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#FEF3C7"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Lunch"
+                android:textColor="#D97706"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/button_dinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#FEE2E2"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Dinner"
+                android:textColor="#DC2626"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

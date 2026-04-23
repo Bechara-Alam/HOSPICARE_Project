@@ -37,12 +37,44 @@ namespace HospitalAPI.Controllers
                 if (appointment == null)
                     return BadRequest("Appointment is null");
 
+                // ✅ Always set status
                 appointment.Status = "requested";
 
+                // ✅ Payment default
+                appointment.PaymentStatus = "pending";
+
+                // 🔥 FIX 1: Ensure Amount is saved
+                if (appointment.Amount <= 0)
+                {
+                    appointment.Amount = 50; // default price (or doctor price later)
+                }
+
+                // 🔥 FIX 2: Handle reference correctly
+                if (!string.IsNullOrEmpty(appointment.PaymentMethod) &&
+     (appointment.PaymentMethod.ToLower() == "omt" ||
+      appointment.PaymentMethod.ToLower() == "wish"))
+                {
+                    if (string.IsNullOrEmpty(appointment.ReferenceNumber))
+                    {
+                        appointment.ReferenceNumber = "HSP" + new Random().Next(10000, 99999);
+                    }
+                }
+                else
+                {
+                    appointment.ReferenceNumber = null;
+                }
+
+                // ✅ Save to DB
                 _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { success = true, message = "Saved!" });
+                return Ok(new
+                {
+                    success = true,
+                    message = "Saved!",
+                    reference = appointment.ReferenceNumber,
+                    id = appointment.Id
+                });
             }
             catch (Exception ex)
             {
@@ -280,9 +312,10 @@ namespace HospitalAPI.Controllers
             if (appointment == null)
                 return NotFound("Appointment not found");
 
-            appointment.Status = "accepted"; // or "paid"
+            // 🔥 ONLY CHANGE THIS
+            appointment.PaymentStatus = "paid";
 
-            await _context.SaveChangesAsync(); // 🔥 MUST EXIST
+            await _context.SaveChangesAsync();
 
             return Ok(new { message = "Appointment marked as paid" });
         }
@@ -293,7 +326,7 @@ namespace HospitalAPI.Controllers
                 .Where(a =>
     a.PatientId == patientId &&
     a.Status != null &&
-    new[] { "accepted", "completed" }
+   new[] { "requested", "accepted", "completed" }
         .Contains(a.Status.Trim().ToLower())
 )
 

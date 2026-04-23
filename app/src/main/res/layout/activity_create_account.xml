@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#F6F7F8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#0F172A"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- USER ID -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User ID"
+            android:textStyle="bold"
+            android:textColor="#334155"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/edit_id"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:hint="Enter user ID"
+            android:textSize="16sp"/>
+
+        <!-- PASSWORD -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textStyle="bold"
+            android:textColor="#334155"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            android:textSize="16sp"/>
+        <!-- NAME -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doctor Name"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Enter name"/>
+
+        <!-- SPECIFICATION -->
+        <EditText
+            android:id="@+id/edit_spec"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Specialization"
+            android:layout_marginTop="12dp"/>
+
+        <!-- PHONE -->
+        <EditText
+            android:id="@+id/edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Phone"
+            android:layout_marginTop="12dp"/>
+
+        <!-- DESCRIPTION -->
+        <EditText
+            android:id="@+id/edit_description"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Description"
+            android:layout_marginTop="12dp"/>
+
+        <!-- QUALIFICATION -->
+        <EditText
+            android:id="@+id/edit_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:hint="Qualifications"
+            android:layout_marginTop="12dp"/>
+
+        <!-- ROLES TITLE -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Roles"
+            android:textStyle="bold"
+            android:textColor="#0F172A"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- CHECKBOX CONTAINER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:elevation="4dp">
+
+            <CheckBox
+                android:id="@+id/cb_doctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doctor"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/cb_lab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Laboratory"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+            <CheckBox
+                android:id="@+id/cb_admin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textSize="16sp"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <!-- BUTTON -->
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Create Account"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#137FEC"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+</ScrollView>

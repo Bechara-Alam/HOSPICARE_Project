@@ -3,7 +3,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="hello_doctor">Hello Doctor</string>
+    <string name="doctor_name">Dr. Name</string>
 
     <string-array name="doctors_name">
         <item>Dr Adiveppa Hosangadi</item>

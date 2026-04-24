@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F4F6F9"
+    android:padding="16dp">
+
+    <!-- 🔷 HEADER -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room Reservation"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#1E293B"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reserve a hospital room easily"
+        android:textSize="14sp"
+        android:textColor="#64748B"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- 🧑 SELECT PATIENT -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Patient"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#1E293B"/>
+
+    <Spinner
+        android:id="@+id/spinner_patients"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:background="#FFFFFF"
+        android:padding="10dp"/>
+
+    <!-- 🏥 ROOM TITLE -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Room"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="12dp"
+        android:textColor="#1E293B"/>
+
+    <!-- 🔥 SCROLLABLE GRID (MAIN FIX) -->
+    <GridView
+        android:id="@+id/grid_rooms"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+    android:layout_weight="1"
+    android:clipToPadding="false"
+    android:horizontalSpacing="10dp"
+    android:numColumns="1"
+    android:padding="10dp"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="10dp" />
+
+    <!-- 📅 DATE -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reservation Date"
+        android:layout_marginTop="8dp"
+        app:boxStrokeColor="#2563EB"
+        app:boxBackgroundMode="outline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_date"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- ⏰ START -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Start Time"
+        android:layout_marginTop="6dp"
+        app:boxStrokeColor="#2563EB"
+        app:boxBackgroundMode="outline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_start_time"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- ⏰ END -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="End Time"
+        android:layout_marginTop="6dp"
+        app:boxStrokeColor="#2563EB"
+        app:boxBackgroundMode="outline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_end_time"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 💳 SUMMARY -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/text_selected_patient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient: Not selected"/>
+
+            <TextView
+                android:id="@+id/text_selected_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Room: Not selected"/>
+
+            <TextView
+                android:id="@+id/text_selected_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date: Not selected"/>
+
+            <TextView
+                android:id="@+id/text_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start: Not selected"/>
+
+            <TextView
+                android:id="@+id/text_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End: Not selected"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 🚀 BUTTON -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reserve"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Confirm Reservation"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#2563EB"
+        android:textColor="#FFFFFF"
+        app:cornerRadius="12dp"/>
+
+</LinearLayout>

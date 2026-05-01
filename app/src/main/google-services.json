@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "530933743682",
+    "project_id": "hospitalapp-992ed",
+    "storage_bucket": "hospitalapp-992ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530933743682:android:4edb87d82c7758bfb06ddb",
+        "android_client_info": {
+          "package_name": "com.example.tatwa10"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh4cm4t2uMYOp-GVz81HqS4IhHoa9gyUw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

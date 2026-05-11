@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class ApiService {
 
-    public static final String BASE_URL = "http://192.168.0.102:5116/api/";
+    public static final String BASE_URL = "http://192.168.100.46:5116/api/";
 
     // LOGIN
     public static String loginUser(String staffId, String password) {
@@ -21,7 +21,6 @@ public class ApiService {
     }
 
     // REGISTER DOCTOR
-    // ✅ CORRECT
     public static String registerDoctor(String staffId, String fullName, String password, String phone, String specialization) {
 
         try {
@@ -400,7 +399,31 @@ public class ApiService {
         String url = BASE_URL + "prescriptions/add";
         return post(url, json);
     }
+    public static String getAcceptedAppointmentsByPatient(int patientId) {
+        try {
+            URL url = new URL(BASE_URL + "Appointments/accepted/" + patientId);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
 
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream())
+            );
+
+            StringBuilder result = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                result.append(line);
+            }
+
+            reader.close();
+            return result.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
    }
 
 
